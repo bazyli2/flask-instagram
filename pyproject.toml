@@ -7,7 +7,9 @@ authors = [
     { name = "Jeremi Wielewski", email = "jeremi.wielewski@profil-software.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "flask>=3.1.0",
+]
 
 [project.scripts]
 flask-instagram = "flask_instagram:main"
@@ -15,3 +17,7 @@ flask-instagram = "flask_instagram:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
