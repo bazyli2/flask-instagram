@@ -1,6 +1,8 @@
 from flask import current_app, redirect, render_template
-from flask_login import login_required
+from flask_login import login_required, login_user
+from flask_instagram.exceptions import DuplicateEmailException
 from flask_instagram.forms import LoginForm, SignUpForm
+from flask_instagram.mutations import create_user
 from flask_instagram.queries import authenticate_user
 
 
@@ -46,4 +48,10 @@ def singup_post():
         return redirect("/signup")
     if form.email.data is None or form.password.data is None:
         return redirect("/signup")
+    try:
+        user = create_user(form.email.data, form.password.data)
+        login_user(user)
+        return redirect("profile")
+    except DuplicateEmailException:
+        redirect("/signup")
     return redirect("/signup")
