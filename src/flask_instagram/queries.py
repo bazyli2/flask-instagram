@@ -12,3 +12,15 @@ def get_user_by_id(user_id: int):
         result = session.execute(stmt)
         user = result.scalar_one_or_none()
     return user
+
+
+def authenticate_user(email: str, password: str):
+    stmt = select(User).where(User.email == email)
+    with Session.begin() as session:
+        result = session.execute(stmt)
+    user = result.scalar_one_or_none()
+    if user is None:
+        return None
+    if user.check_password(password):
+        return user
+    return None
