@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 
 
 def create_app():
@@ -9,6 +10,7 @@ def create_app():
     from flask_instagram.db import db
 
     db.init_app(app)
+    migrate = Migrate(app, db)
     with app.app_context():
         import flask_instagram.routes
         from flask_instagram.login import login_manager
