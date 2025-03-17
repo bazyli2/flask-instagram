@@ -1,5 +1,4 @@
-from flask import current_app, render_template
-
+from flask import current_app, redirect, render_template
 from flask_instagram.forms import LoginForm
 
 
