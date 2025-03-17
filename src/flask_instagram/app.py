@@ -6,6 +6,9 @@ def create_app():
     from flask_instagram.config import Config
 
     app.config.from_object(Config)
+    from flask_instagram.db import db
+
+    db.init_app(app)
     with app.app_context():
         import flask_instagram.routes
         from flask_instagram.login import login_manager
