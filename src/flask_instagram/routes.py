@@ -1,6 +1,6 @@
 from flask import current_app, redirect, render_template
 from flask_login import login_required
-from flask_instagram.forms import LoginForm
+from flask_instagram.forms import LoginForm, SignUpForm
 from flask_instagram.queries import authenticate_user
 
 
@@ -31,3 +31,19 @@ def login_post():
         return redirect("/login")
     else:
         return redirect("/profile")
+
+
+@current_app.route("/signup", methods=["GET"])
+def signup_get():
+    return render_template("signup.html", form=SignUpForm())
+
+
+@current_app.route("/signup", methods=["POST"])
+def singup_post():
+    form = SignUpForm()
+
+    if not form.validate_on_submit():
+        return redirect("/signup")
+    if form.email.data is None or form.password.data is None:
+        return redirect("/signup")
+    return redirect("/signup")
