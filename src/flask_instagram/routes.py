@@ -20,8 +20,8 @@ def login_get():
     return render_template("login.html", form=LoginForm())
 
 
-@current_app.route("/login", methods=["GET", "POST"])
-def login():
+@current_app.route("/login", methods=["POST"])
+def login_post():
     form = LoginForm()
     if not form.validate_on_submit():
         return redirect("/login")
