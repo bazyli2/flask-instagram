@@ -12,7 +12,7 @@ from flask_instagram.auth.template_helpers import (
     render_signup_template,
 )
 
-bp = Blueprint("auth", __name__)
+bp = Blueprint("auth", __name__, template_folder="templates")
 
 
 @bp.route("/")
