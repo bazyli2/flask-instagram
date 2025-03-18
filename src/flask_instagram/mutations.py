@@ -4,9 +4,9 @@ from sqlalchemy.orm import sessionmaker
 from flask_instagram.db import db
 from flask_instagram.exceptions import DuplicateEmailException
 from flask_instagram.models import User
+from flask_instagram.session import Session
 
 
-Session = sessionmaker(db.engine, expire_on_commit=False)
 
 
 def create_user(email: str, password: str):
@@ -17,4 +17,5 @@ def create_user(email: str, password: str):
             raise DuplicateEmailException
         user = User(email=email)
         user.set_password(password)
+        session.add(user)
     return user

@@ -3,8 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from flask_instagram.exceptions import InvalidCredentialsException
 from flask_instagram.models import User
 from flask_instagram.db import db
-
-Session = sessionmaker(db.engine, expire_on_commit=False)
+from flask_instagram.session import Session
 
 
 def get_user_by_id(user_id: int):
