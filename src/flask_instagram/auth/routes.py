@@ -20,12 +20,6 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@bp.route("/profile")
-@login_required
-def profile():
-    return "<p>Profile</p>"
-
-
 @bp.route("/login", methods=["GET"])
 def login_get():
     if current_user.is_authenticated:
