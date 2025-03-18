@@ -1,5 +1,5 @@
 from flask import current_app, flash, redirect, render_template
-from flask_login import login_required, login_user
+from flask_login import current_user, login_required, login_user
 from flask_instagram.exceptions import (
     DuplicateEmailException,
     InvalidCredentialsException,
@@ -26,6 +26,8 @@ def profile():
 
 @current_app.route("/login", methods=["GET"])
 def login_get():
+    if current_user.is_authenticated:
+        return redirect("/profile")
     return render_login_template(LoginForm())
 
 
@@ -40,12 +42,14 @@ def login_post():
         authenticate_user(form.email.data, form.password.data)
         return redirect("/profile")
     except InvalidCredentialsException:
-        flash('incorrect email or password')
+        flash("incorrect email or password")
         return redirect("/login")
 
 
 @current_app.route("/signup", methods=["GET"])
 def signup_get():
+    if current_user.is_authenticated:
+        return redirect("/profile")
     return render_signup_template(SignUpForm())
 
 
@@ -62,5 +66,5 @@ def singup_post():
         login_user(user)
         return redirect("profile")
     except DuplicateEmailException:
-        flash('user with this email already exists')
+        flash("user with this email already exists")
         return redirect("/signup")
