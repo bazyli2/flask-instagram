@@ -12,8 +12,10 @@ def create_app():
         from flask_instagram.db import db
 
         db.init_app(app)
-        migrate = Migrate(app, db)
-        import flask_instagram.auth.routes
+        Migrate(app, db)
+        from flask_instagram.auth.routes import bp
+
+        app.register_blueprint(bp)
         from flask_instagram.login import login_manager
 
         login_manager.init_app(app)

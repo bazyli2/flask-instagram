@@ -1,4 +1,4 @@
-from flask import current_app, flash, redirect
+from flask import Blueprint, current_app, flash, redirect
 from flask_login import current_user, login_required, login_user
 from flask_instagram.auth.exceptions import (
     DuplicateEmailException,
@@ -12,26 +12,28 @@ from flask_instagram.auth.template_helpers import (
     render_signup_template,
 )
 
+bp = Blueprint("auth", __name__)
 
-@current_app.route("/")
+
+@bp.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@current_app.route("/profile")
+@bp.route("/profile")
 @login_required
 def profile():
     return "<p>Profile</p>"
 
 
-@current_app.route("/login", methods=["GET"])
+@bp.route("/login", methods=["GET"])
 def login_get():
     if current_user.is_authenticated:
         return redirect("/profile")
     return render_login_template(LoginForm())
 
 
-@current_app.route("/login", methods=["POST"])
+@bp.route("/login", methods=["POST"])
 def login_post():
     form = LoginForm()
     if not form.validate_on_submit():
@@ -46,14 +48,14 @@ def login_post():
         return redirect("/login")
 
 
-@current_app.route("/signup", methods=["GET"])
+@bp.route("/signup", methods=["GET"])
 def signup_get():
     if current_user.is_authenticated:
         return redirect("/profile")
     return render_signup_template(SignUpForm())
 
 
-@current_app.route("/signup", methods=["POST"])
+@bp.route("/signup", methods=["POST"])
 def singup_post():
     form = SignUpForm()
 
