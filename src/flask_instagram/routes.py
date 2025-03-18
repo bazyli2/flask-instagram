@@ -1,6 +1,6 @@
 from flask import current_app, redirect, render_template
 from flask_login import login_required, login_user
-from flask_instagram.exceptions import DuplicateEmailException
+from flask_instagram.exceptions import DuplicateEmailException, InvalidCredentialsException
 from flask_instagram.forms import LoginForm, SignUpForm
 from flask_instagram.mutations import create_user
 from flask_instagram.queries import authenticate_user
@@ -29,10 +29,11 @@ def login_post():
         return render_template('login.html', form=form)
     if form.email.data is None or form.password.data is None:
         return redirect("/login")
-    if authenticate_user(form.email.data, form.password.data) is None:
-        return redirect("/login")
-    else:
+    try:
+        authenticate_user(form.email.data, form.password.data)
         return redirect("/profile")
+    except InvalidCredentialsException:
+        return redirect("/login")
 
 
 @current_app.route("/signup", methods=["GET"])
