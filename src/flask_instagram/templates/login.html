@@ -1,3 +1,4 @@
+{% extends "base.html" %} {% block content %}
 <form action="" method="post" novalidate>
   {{ form.hidden_tag() }}
   <p>
@@ -16,3 +17,4 @@
   </p>
   <p>{{ form.submit() }}</p>
 </form>
+{% endblock %}
