@@ -26,7 +26,7 @@ def login_get():
 def login_post():
     form = LoginForm()
     if not form.validate_on_submit():
-        return redirect("/login")
+        return render_template('login.html', form=form)
     if form.email.data is None or form.password.data is None:
         return redirect("/login")
     if authenticate_user(form.email.data, form.password.data) is None:
@@ -45,7 +45,7 @@ def singup_post():
     form = SignUpForm()
 
     if not form.validate_on_submit():
-        return redirect("/signup")
+        return render_template('signup.html', form=form)
     if form.email.data is None or form.password.data is None:
         return redirect("/signup")
     try:
