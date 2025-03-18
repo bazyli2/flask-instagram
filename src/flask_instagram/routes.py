@@ -46,12 +46,11 @@ def singup_post():
 
     if not form.validate_on_submit():
         return render_template('signup.html', form=form)
-    if form.email.data is None or form.password.data is None:
+    if (form.email.data is None or form.password.data is None):
         return redirect("/signup")
     try:
         user = create_user(form.email.data, form.password.data)
         login_user(user)
         return redirect("profile")
     except DuplicateEmailException:
-        redirect("/signup")
-    return redirect("/signup")
+        return redirect("/signup")

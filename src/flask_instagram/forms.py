@@ -15,11 +15,11 @@ class SignUpForm(FlaskForm):
         validators=[
             DataRequired(),
             Length(8, 72),
-            Regexp(r"\d", message="Password must include at least one digit"),
-            Regexp(
-                "[$&+,:;=?@#|'<>.^*()%!-]",
-                message="Password must include at least one special character",
-            ),
+            # Regexp(r"\d", message="Password must include at least one digit"),
+            # Regexp(
+            #     "[$&+,:;=?@#|'<>.^*()%!-]",
+            #     message="Password must include at least one special character",
+            # ),
         ],
     )
     submit = SubmitField("Sign Up")
