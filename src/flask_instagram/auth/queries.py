@@ -1,8 +1,6 @@
 from sqlalchemy import select
-from sqlalchemy.orm import sessionmaker
 from flask_instagram.auth.exceptions import InvalidCredentialsException
 from flask_instagram.auth.models import User
-from flask_instagram.db import db
 from flask_instagram.session import Session
 
 

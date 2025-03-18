@@ -1,4 +1,4 @@
-from flask import current_app, flash, redirect, render_template
+from flask import current_app, flash, redirect
 from flask_login import current_user, login_required, login_user
 from flask_instagram.auth.exceptions import (
     DuplicateEmailException,
