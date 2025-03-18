@@ -1,5 +1,18 @@
-<form method="POST" action="/">
-  {{ form.hidden_tag() }} {{ form.csrf_token }} {{ form.email.label }} {{
-  form.email(size=20) }} {{ form.password.label }} {{ form.password(size=20) }}
-  <input type="submit" value="Go" />
+<form action="" method="post" novalidate>
+  {{ form.hidden_tag() }}
+  <p>
+    {{ form.email.label }}<br />
+    {{ form.email(size=32) }}<br />
+    {% for error in form.email.errors %}
+    <span style="color: red">[{{ error }}]</span>
+    {% endfor %}
+  </p>
+  <p>
+    {{ form.password.label }}<br />
+    {{ form.password(size=32) }}<br />
+    {% for error in form.password.errors %}
+    <span style="color: red">[{{ error }}]</span>
+    {% endfor %}
+  </p>
+  <p>{{ form.submit() }}</p>
 </form>
