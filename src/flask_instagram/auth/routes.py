@@ -1,13 +1,13 @@
 from flask import current_app, flash, redirect, render_template
 from flask_login import current_user, login_required, login_user
-from flask_instagram.exceptions import (
+from flask_instagram.auth.exceptions import (
     DuplicateEmailException,
     InvalidCredentialsException,
 )
-from flask_instagram.forms import LoginForm, SignUpForm
-from flask_instagram.mutations import create_user
-from flask_instagram.queries import authenticate_user
-from flask_instagram.template_helpers import (
+from flask_instagram.auth.forms import LoginForm, SignUpForm
+from flask_instagram.auth.mutations import create_user
+from flask_instagram.auth.queries import authenticate_user
+from flask_instagram.auth.template_helpers import (
     render_login_template,
     render_signup_template,
 )

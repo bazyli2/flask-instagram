@@ -1,5 +1,5 @@
 from flask import render_template
-from flask_instagram.forms import LoginForm, SignUpForm
+from flask_instagram.auth.forms import LoginForm, SignUpForm
 
 
 def render_login_template(form: LoginForm):

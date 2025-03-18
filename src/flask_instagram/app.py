@@ -13,7 +13,7 @@ def create_app():
 
         db.init_app(app)
         migrate = Migrate(app, db)
-        import flask_instagram.routes
+        import flask_instagram.auth.routes
         from flask_instagram.login import login_manager
 
         login_manager.init_app(app)
