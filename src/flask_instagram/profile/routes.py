@@ -26,7 +26,6 @@ def upload_photo_get():
 @login_required
 def upload_photo_post():
     form = UploadPhotoForm()
-    print(form.photo.)
     if not form.validate_on_submit():
         return render_upload_photo_template(form)
     if form.photo.data is None or form.description.data is None:
