@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from flask_instagram.auth.exceptions import DuplicateEmailException
-from flask_instagram.auth.models import User
+from flask_instagram.models import User
 from flask_instagram.session import Session
 
 
