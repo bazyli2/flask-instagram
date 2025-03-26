@@ -13,7 +13,7 @@ class User(Base, UserMixin):
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(String(120), index=True, unique=True)
     password_hash: Mapped[str] = mapped_column(String(256))
-    photos: Mapped[List["Photo"]] = relationship()
+    photos: Mapped[List["Photo"]] = relationship(back_populates='user')
 
     def set_password(self, password: str):
         self.password_hash = generate_password_hash(password)
